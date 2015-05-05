@@ -22,3 +22,4 @@ configure
 ocamlinit-stamp
 setup.ml
 Makefile
+*~
