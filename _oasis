@@ -1,0 +1,54 @@
+OASISFormat:  0.4
+Name:         onemq
+Version:      1.0.0
+Synopsis:     UDP based messaging system
+Authors:      Goswin von Brederlow <goswin-v-b@web.de>
+LicenseFile:  LICENSE
+License:      LGPL-2.1+
+BuildTools:   ocamlbuild
+Plugins:      DevFiles (0.4), META (0.4)
+OCamlVersion: >= 4.02
+
+Flag strict
+  Description: Strict compile-time checks
+  Default: true
+
+Library OneMQCommon
+  Path:            common
+  Pack:		   true
+  CompiledObject:  best
+  InternalModules: ocaml/BE, ocaml/Globals, ocaml/Msg
+
+Library OneMQ
+  Path:            onemq
+  Pack:		   true
+  CompiledObject:  best
+  InternalModules: ocaml/Peer, ocaml/Msg
+  BuildDepends:	   unix, OneMQCommon
+
+Executable onemq_kernel
+  Path:           kernel
+  Install:        true
+  Custom:         true
+  CompiledObject: best
+  MainIs:         main.ml
+  BuildDepends:   unix, OneMQCommon
+
+Executable test
+  Path: test
+  Install: false
+  Custom: true
+  CompiledObject: best
+  MainIs: test.ml
+  BuildDepends: OneMQ
+
+Test main
+  Command: $test $onemq_kernel
+  TestTools: test, onemq_kernel
+
+#Document OneMQ
+#  Title:                OneMQ documentation
+#  Type:                 ocamlbuild (0.3)
+#  BuildTools+:          ocamldoc
+#  XOCamlbuildPath:      onemq
+#  XOCamlbuildLibraries: OneMQ
