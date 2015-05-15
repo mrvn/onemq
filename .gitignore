@@ -23,3 +23,13 @@ ocamlinit-stamp
 setup.ml
 Makefile
 *~
+/debian/tmp/
+/debian/clean
+/debian/files
+/debian/*.debhelper.log
+/debian/*.substvars
+/debian/*.debhelper
+/debian/*.install
+/debian/ocaml-onemq-dev/
+/debian/ocaml-onemq-kernel/
+/debian/ocaml-onemq/
