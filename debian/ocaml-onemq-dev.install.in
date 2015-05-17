@@ -1,0 +1,13 @@
+@OCamlStdlibDir@/OneMQ/*.cm[ixo]
+#@OCamlStdlibDir@/OneMQ/*.ml*
+@OCamlStdlibDir@/OneMQ/*.a
+OPT: @OCamlStdlibDir@/OneMQ/*.cmxa
+DYN: @OCamlStdlibDir@/OneMQ/*.cmxs
+
+@OCamlStdlibDir@/OneMQCommon/*.cm[ixo]
+#@OCamlStdlibDir@/OneMQCommon/*.ml*
+@OCamlStdlibDir@/OneMQCommon/*.a
+OPT: @OCamlStdlibDir@/OneMQCommon/*.cmxa
+DYN: @OCamlStdlibDir@/OneMQCommon/*.cmxs
+
+# usr/share/doc/ocaml-OneMQ-dev

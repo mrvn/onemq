@@ -1,0 +1,4 @@
+@OCamlStdlibDir@/OneMQCommon/*.cm[a]
+@OCamlStdlibDir@/OneMQCommon/META
+/usr/bin/onemq_kernel /usr/lib/onemq-kernel/
+

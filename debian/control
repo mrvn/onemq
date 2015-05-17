@@ -1,0 +1,76 @@
+Source: ocaml-onemq
+Priority: optional
+Maintainer: Goswin von Brederlow <goswin-v-b@web.de>
+Build-Depends:
+ debhelper (>= 9),
+ dh-ocaml (>= 0.9),
+ ocaml-findlib,
+ libfindlib-ocaml-dev,
+ ocaml-nox (>= 3.11)
+Standards-Version: 3.9.5
+Section: ocaml
+Homepage: https://github.org/mrvn/onemq
+Vcs-Git: git://github.com/mrvn/onemq.git
+
+Package: ocaml-onemq-dev
+Architecture: any
+Depends:
+ ${ocaml:Depends},
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides: ${ocaml:Provides}
+Recommends:
+ ocaml-findlib
+Description: udp based messaging system (ocaml client development files)
+ OneMQ is a messaging system based ontop the UDP protocol adding
+ reliable messaging, heartbeats, flow control, authentication,
+ encryption and multicasting on top.
+ .
+ The design uses a multi-process approach running a messaging kernel,
+ written in ocaml, as separate process while communicating with the
+ application with a single socket. This keeps the messaging kernel
+ language independent of the applications language with only a small
+ glue module in the application to simplify talking to the kernel.
+ .
+ This package contains the development files for clients for ocaml.
+
+Package: ocaml-onemq
+Architecture: any
+Depends:
+ ${ocaml:Depends},
+ ${shlibs:Depends},
+ ${misc:Depends},
+ ocaml-onemq-kernel (= ${binary:Version})
+Provides: ${ocaml:Provides}
+Description: udp based messaging system (ocaml client runtime files)
+ OneMQ is a messaging system based ontop the UDP protocol adding
+ reliable messaging, heartbeats, flow control, authentication,
+ encryption and multicasting on top.
+ .
+ The design uses a multi-process approach running a messaging kernel,
+ written in ocaml, as separate process while communicating with the
+ application with a single socket. This keeps the messaging kernel
+ language independent of the applications language with only a small
+ glue module in the application to simplify talking to the kernel.
+ .
+ This package contains the runtime files for clients for ocaml.
+
+Package: ocaml-onemq-kernel
+Architecture: any
+Depends:
+ ${ocaml:Depends},
+ ${shlibs:Depends},
+ ${misc:Depends}
+Provides: ${ocaml:Provides}
+Description: udp based messaging system (messaging kernel)
+ OneMQ is a messaging system based ontop the UDP protocol adding
+ reliable messaging, heartbeats, flow control, authentication,
+ encryption and multicasting on top.
+ .
+ The design uses a multi-process approach running a messaging kernel,
+ written in ocaml, as separate process while communicating with the
+ application with a single socket. This keeps the messaging kernel
+ language independent of the applications language with only a small
+ glue module in the application to simplify talking to the kernel.
+ .
+ This package contains the messaging kernel used by all clients.
