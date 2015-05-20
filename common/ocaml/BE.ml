@@ -42,9 +42,9 @@ let set_uint31 buf off v =
   Bytes.set buf (off + 2) (char_of_int x2);
   Bytes.set buf (off + 3) (char_of_int x3)
 
-let get_str buf off len = Bytes.sub buf off len
+let get_str buf off len = Bytes.sub_string buf off len
 
 let set_str buf off s =
-  let len = Bytes.length s
+  let len = String.length s
   in
-  Bytes.blit s 0 buf off len
+  Bytes.blit_string s 0 buf off len
