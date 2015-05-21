@@ -12,7 +12,7 @@ end
 module Quit = struct
   include OneMQCommon.Msg.Quit
 
-  let set buf off _ = off
+  let set _ off _ = off
 end
 
 include OneMQCommon.Msg.Union
@@ -22,7 +22,7 @@ let quit () = Quit (Quit.make ())
 let parse buf =
   match BE.get_uint8 buf 0 with
   | net_id when net_id == Hello.net_id ->
-    let (off, hello) = Hello.get buf 1
+    let (_, hello) = Hello.get buf 1
     in
     Hello hello
   | net_id as x when net_id == Quit.net_id ->
