@@ -4,7 +4,7 @@ module Hello = struct
   include OneMQCommon.Msg.Hello
 
   let set buf off s =
-    let len = Bytes.length s
+    let len = String.length s
     in
     assert (len < 256);
     BE.set_uint8 buf (off + 0) len;
@@ -15,7 +15,7 @@ end
 module Quit = struct
   include OneMQCommon.Msg.Quit
 
-  let get buf off = (off, make ())
+  let get _ off = (off, make ())
 end
 
 include OneMQCommon.Msg.Union
@@ -29,7 +29,7 @@ let parse buf =
     in
     raise (OneMQCommon.Msg.ParseError s)
   | net_id when net_id == Quit.net_id ->
-    let (off, quit) = Quit.get buf 1
+    let (_, quit) = Quit.get buf 1
     in
     Quit quit
   | x ->
