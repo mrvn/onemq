@@ -37,12 +37,12 @@ let rec loop () =
   in
   let finished =
     List.fold_left
-      (fun finished fd ->
+      (fun _(*finished*) fd ->
 	if fd == peer_fd
 	then
 	  try
 	    match recv_peer () with
-	    | Msg.Quit quit ->
+	    | Msg.Quit _ ->
 	      Printf.printf "OneMQKernel: got quit\n%!";
 	      true
 	  with End_of_file ->
