@@ -23,7 +23,7 @@ Library OneMQ
   Path:            onemq
   Pack:		   true
   CompiledObject:  best
-  InternalModules: ocaml/Peer, ocaml/Msg
+  InternalModules: ocaml/Client, ocaml/Msg
   BuildDepends:	   unix, OneMQCommon
 
 Executable onemq_kernel

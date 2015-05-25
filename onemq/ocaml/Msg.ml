@@ -26,7 +26,7 @@ let parse buf =
     in
     Hello hello
   | net_id as x when net_id == Quit.net_id ->
-    let s = Printf.sprintf "Wrong kind for peer: %d" x
+    let s = Printf.sprintf "Wrong kind for client: %d" x
     in
     raise (OneMQCommon.Msg.ParseError s)
   | x ->

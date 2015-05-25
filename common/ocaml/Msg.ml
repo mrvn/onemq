@@ -24,6 +24,6 @@ module Union = struct
   type kernel_msg =
   | Hello of Hello.t
 
-  type peer_msg =
+  type client_msg =
   | Quit of Quit.t
 end
