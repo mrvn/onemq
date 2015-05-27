@@ -3,7 +3,7 @@ let () =
   Printf.printf "  Kernel = %s\n%!" Sys.argv.(1)
 
 (* create peer *)
-let peer = OneMQ.Client.make ~kernel:Sys.argv.(1) ()
+let peer = OneMQ.Client.make ~kernel:Sys.argv.(1) ~port:1234 ()
 
 (* receive hello message from kernel *)
 let () =

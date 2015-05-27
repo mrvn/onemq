@@ -3,9 +3,10 @@ type t = {
   fd : Unix.file_descr;
 }
 
-let make ?(kernel=OneMQCommon.Globals.default_kernel_path) () =
+let make ?(kernel=OneMQCommon.Globals.default_kernel_path) ?(port=0) () =
   Printf.printf "OneMQ: initializing ...\n";
   Printf.printf "  Kernel = %s\n%!" kernel;
+  Printf.printf "  Port = %d\n%!" port;
   let (sock_parent, sock_child) =
     Unix.socketpair Unix.PF_UNIX Unix.SOCK_SEQPACKET 0
   in
