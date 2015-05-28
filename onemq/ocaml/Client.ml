@@ -26,12 +26,12 @@ let make ?(kernel=OneMQCommon.Globals.default_kernel_path) ?(port=0) () =
     Unix.close sock_child;
     { pid; fd = sock_parent; }
 
-let destroy peer =
+let destroy client =
   Printf.printf "OneMQ: shuting down ...\n%!";
-  Unix.shutdown peer.fd Unix.SHUTDOWN_ALL;
-  Unix.close peer.fd;
+  Unix.shutdown client.fd Unix.SHUTDOWN_ALL;
+  Unix.close client.fd;
   Printf.printf "OneMQ: waiting for kernel to die ...\n%!";
-  let (_, status) = Unix.waitpid [] peer.pid
+  let (_, status) = Unix.waitpid [] client.pid
   in begin
   match status with
   | Unix.WEXITED x ->
@@ -43,24 +43,24 @@ let destroy peer =
   end;
   Printf.printf "OneMQ: done\n%!"
 
-let recv peer =
+let recv client =
   Printf.printf "OneMQ.recv\n%!";
   let buf = Bytes.create OneMQCommon.Globals.buf_size in
-  let res = Unix.recv peer.fd buf 0 OneMQCommon.Globals.buf_size [] in
+  let res = Unix.recv client.fd buf 0 OneMQCommon.Globals.buf_size [] in
   if res == 0
   then raise End_of_file
   else
     let buf = Bytes.sub buf 0 res in
     Msg.parse buf
 
-let send peer msg =
+let send client msg =
   Printf.printf "OneMQ.send\n%!";
   let buf = Msg.dump msg in
   let len = Bytes.length buf in
-  let res = Unix.send peer.fd buf 0 len [] in
+  let res = Unix.send client.fd buf 0 len [] in
   assert (res == len)
 
-let quit peer =
+let quit client =
   Printf.printf "OneMQ.quit\n%!";
   let msg = Msg.quit () in
-  send peer msg
+  send client msg
